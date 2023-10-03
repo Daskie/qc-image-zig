@@ -7,18 +7,35 @@ const qc = struct
 
 pub fn main() !void
 {
-    var gpa = std.heap.GeneralPurposeAllocator(.{}){};
-    defer _ = gpa.deinit();
+    // G
+    {
+        var image: qc.image.GImage = try qc.image.read("g-in.png", 1);
+        defer image.deinit();
 
-    const allocator = gpa.allocator();
+        try qc.image.writePng("g-out.png", 1, image);
+    }
 
-    const data: []u8 = try qc.readFile("g-in.png", allocator);
-    defer _ = allocator.free(data);
+    // GA
+    {
+        var image: qc.image.GAImage = try qc.image.read("ga-in.png", 2);
+        defer image.deinit();
 
-    const image: qc.image.GImage = try qc.image.decode(1, data);
-    defer image.deinit();
+        try qc.image.writePng("ga-out.png", 2, image);
+    }
 
-    const encodedData: []u8 = try qc.image.encodePng(1, image);
+    // RGB
+    {
+        var image: qc.image.RGBImage = try qc.image.read("rgb-in.png", 3);
+        defer image.deinit();
 
-    try qc.writeFile("g-out.png", encodedData);
+        try qc.image.writePng("rgb-out.png", 3, image);
+    }
+
+    // RGBA
+    {
+        var image: qc.image.RGBAImage = try qc.image.read("rgba-in.png", 4);
+        defer image.deinit();
+
+        try qc.image.writePng("rgba-out.png", 4, image);
+    }
 }
