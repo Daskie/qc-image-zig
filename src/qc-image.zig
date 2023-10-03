@@ -79,8 +79,7 @@ pub fn encodePng(comptime componentN: u8, image: Image(componentN)) ![]u8
 
 pub fn read(path: []const u8, comptime expectedComponentN: u8) !Image(expectedComponentN)
 {
-    var encodedData = try qc.readFile(path, std.heap.raw_c_allocator);
-    defer std.heap.raw_c_allocator.free(encodedData);
+    var encodedData = try qc.readFile(path);
     return decode(expectedComponentN, encodedData);
 }
 
