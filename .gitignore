@@ -1,6 +1,8 @@
-.vscode/
-build/
-deps/
-zig-cache/
+.vscode
+build
+modules/qc-core
+zig-cache
+
+qc-build.zig
 
 *.png

@@ -1,5 +1,6 @@
 const std = @import("std");
-const qc = @import("qc-core");
+
+const qc = @import("../qc-core/qc-core.zig");
 
 const UVec2 = qc.UVec2;
 
@@ -14,7 +15,8 @@ pub fn Image(comptime n: u8) type
         size: UVec2,
         data: []Pixel,
 
-        pub const Pixel = if (n == 1) u8 else qc.U8Vec(n);
+        pub const componentN = n;
+        pub const Pixel = if (componentN == 1) u8 else qc.U8Vec(componentN);
 
         pub fn init(size: UVec2) @This()
         {

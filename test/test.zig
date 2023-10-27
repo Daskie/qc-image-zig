@@ -1,8 +1,8 @@
 const std = @import("std");
 const qc = struct
 {
-    usingnamespace @import("qc-core");
-    const image = @import("qc-image");
+    usingnamespace @import("../modules/qc-core/qc-core.zig");
+    const image = @import("../modules/qc-image/qc-image.zig");
 };
 
 pub fn main() !void
